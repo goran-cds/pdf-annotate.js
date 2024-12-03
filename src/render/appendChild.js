@@ -1,10 +1,11 @@
-import renderLine from './renderLine';
-import renderPath from './renderPath';
-import renderPoint from './renderPoint';
-import renderRect from './renderRect';
-import renderText from './renderText';
-import renderCircle from './renderCircle';
-import renderArrow from './renderArrow';
+import renderLine from "./renderLine";
+import renderPath from "./renderPath";
+import renderPoint from "./renderPoint";
+import renderRect from "./renderRect";
+import renderStamp from "./renderStamp";
+import renderText from "./renderText";
+import renderCircle from "./renderCircle";
+import renderArrow from "./renderArrow";
 
 const isFirefox = /firefox/i.test(navigator.userAgent);
 
@@ -53,24 +54,39 @@ function transform(node, viewport) {
   let trans = getTranslation(viewport);
 
   // Let SVG natively transform the element
-  node.setAttribute('transform', `scale(${viewport.scale}) rotate(${viewport.rotation}) translate(${trans.x}, ${trans.y})`);
+  node.setAttribute(
+    "transform",
+    `scale(${viewport.scale}) rotate(${viewport.rotation}) translate(${trans.x}, ${trans.y})`
+  );
 
   // Manually adjust x/y for nested SVG nodes
-  if (!isFirefox && node.nodeName.toLowerCase() === 'svg') {
-    node.setAttribute('x', parseInt(node.getAttribute('x'), 10) * viewport.scale);
-    node.setAttribute('y', parseInt(node.getAttribute('y'), 10) * viewport.scale);
+  if (!isFirefox && node.nodeName.toLowerCase() === "svg") {
+    node.setAttribute(
+      "x",
+      parseInt(node.getAttribute("x"), 10) * viewport.scale
+    );
+    node.setAttribute(
+      "y",
+      parseInt(node.getAttribute("y"), 10) * viewport.scale
+    );
 
-    let x = parseInt(node.getAttribute('x', 10));
-    let y = parseInt(node.getAttribute('y', 10));
-    let width = parseInt(node.getAttribute('width'), 10);
-    let height = parseInt(node.getAttribute('height'), 10);
-    let path = node.querySelector('path');
+    let x = parseInt(node.getAttribute("x", 10));
+    let y = parseInt(node.getAttribute("y", 10));
+    let width = parseInt(node.getAttribute("width"), 10);
+    let height = parseInt(node.getAttribute("height"), 10);
+    let path = node.querySelector("path");
     let svg = path.parentNode;
 
     // Scale width/height
-    [node, svg, path, node.querySelector('rect')].forEach((n) => {
-      n.setAttribute('width', parseInt(n.getAttribute('width'), 10) * viewport.scale);
-      n.setAttribute('height', parseInt(n.getAttribute('height'), 10) * viewport.scale);
+    [node, svg, path, node.querySelector("rect")].forEach((n) => {
+      n.setAttribute(
+        "width",
+        parseInt(n.getAttribute("width"), 10) * viewport.scale
+      );
+      n.setAttribute(
+        "height",
+        parseInt(n.getAttribute("height"), 10) * viewport.scale
+      );
     });
 
     // Transform path but keep scale at 100% since it will be handled natively
@@ -78,21 +94,21 @@ function transform(node, viewport) {
 
     switch (viewport.rotation % 360) {
       case 90:
-        node.setAttribute('x', viewport.width - y - width);
-        node.setAttribute('y', x);
-        svg.setAttribute('x', 1);
-        svg.setAttribute('y', 0);
+        node.setAttribute("x", viewport.width - y - width);
+        node.setAttribute("y", x);
+        svg.setAttribute("x", 1);
+        svg.setAttribute("y", 0);
         break;
       case 180:
-        node.setAttribute('x', viewport.width - x - width);
-        node.setAttribute('y', viewport.height - y - height);
-        svg.setAttribute('y', 2);
+        node.setAttribute("x", viewport.width - x - width);
+        node.setAttribute("y", viewport.height - y - height);
+        svg.setAttribute("y", 2);
         break;
       case 270:
-        node.setAttribute('x', y);
-        node.setAttribute('y', viewport.height - x - height);
-        svg.setAttribute('x', -1);
-        svg.setAttribute('y', 0);
+        node.setAttribute("x", y);
+        node.setAttribute("y", viewport.height - x - height);
+        svg.setAttribute("x", -1);
+        svg.setAttribute("y", 0);
         break;
     }
   }
@@ -110,34 +126,37 @@ function transform(node, viewport) {
  */
 export function appendChild(svg, annotation, viewport) {
   if (!viewport) {
-    viewport = JSON.parse(svg.getAttribute('data-pdf-annotate-viewport'));
+    viewport = JSON.parse(svg.getAttribute("data-pdf-annotate-viewport"));
   }
 
   let child;
   switch (annotation.type) {
-    case 'area':
-    case 'highlight':
+    case "area":
+    case "highlight":
       child = renderRect(annotation);
       break;
-    case 'circle':
-    case 'fillcircle':
-    case 'emptycircle':
+    case "circle":
+    case "fillcircle":
+    case "emptycircle":
       child = renderCircle(annotation);
       break;
-    case 'strikeout':
+    case "strikeout":
       child = renderLine(annotation);
       break;
-    case 'point':
+    case "point":
       child = renderPoint(annotation);
       break;
-    case 'textbox':
+    case "textbox":
       child = renderText(annotation);
       break;
-    case 'drawing':
+    case "drawing":
       child = renderPath(annotation);
       break;
-    case 'arrow':
+    case "arrow":
       child = renderArrow(annotation);
+    case "stamp":
+      child = renderStamp(annotation);
+      break;
       break;
   }
 
@@ -145,16 +164,35 @@ export function appendChild(svg, annotation, viewport) {
   // Skip appending/transforming if node doesn't exist.
   if (child) {
     // Set attributes
-    child.setAttribute('data-pdf-annotate-id', annotation.uuid);
-    child.setAttribute('aria-hidden', true);
+    child.setAttribute("data-pdf-annotate-id", annotation.uuid);
+    child.setAttribute("aria-hidden", true);
 
     // Dynamically set any other attributes associated with annotation that is not related to drawing it
-    Object.keys(annotation).filter((key) => {
-      return ['color', 'x', 'y', 'cx', 'cy', 'color', 'documentId', 'lines', 'page',
-        'width', 'class', 'content', 'size', 'rotation', 'r'].indexOf(key) === -1;
-    }).forEach((key) => {
-      child.setAttribute(`data-pdf-annotate-${key}`, annotation[key]);
-    });
+    Object.keys(annotation)
+      .filter((key) => {
+        return (
+          [
+            "color",
+            "x",
+            "y",
+            "cx",
+            "cy",
+            "color",
+            "documentId",
+            "lines",
+            "page",
+            "width",
+            "class",
+            "content",
+            "size",
+            "rotation",
+            "r",
+          ].indexOf(key) === -1
+        );
+      })
+      .forEach((key) => {
+        child.setAttribute(`data-pdf-annotate-${key}`, annotation[key]);
+      });
 
     svg.appendChild(transform(child, viewport));
   }
@@ -172,7 +210,7 @@ export function appendChild(svg, annotation, viewport) {
  */
 export function transformChild(svg, child, viewport) {
   if (!viewport) {
-    viewport = JSON.parse(svg.getAttribute('data-pdf-annotate-viewport'));
+    viewport = JSON.parse(svg.getAttribute("data-pdf-annotate-viewport"));
   }
 
   // If no type was provided for an annotation it will result in node being null.
@@ -199,5 +237,5 @@ export default {
   /**
    * Transform an existing SVG child
    */
-  transformChild
+  transformChild,
 };
