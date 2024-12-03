@@ -1,4 +1,4 @@
-# @submitty/pdf-annotate.js
+# @goran-cds/pdf-annotate.js
 
 [![Test](https://github.com/Submitty/pdf-annotate.js/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/Submitty/pdf-annotate.js/actions/workflows/test.yml)
 [![codecov](https://codecov.io/gh/Submitty/pdf-annotate.js/branch/master/graph/badge.svg)](https://codecov.io/gh/Submitty/pdf-annotate.js)
