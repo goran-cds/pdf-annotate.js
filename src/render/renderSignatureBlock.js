@@ -1,6 +1,8 @@
 import setAttributes from "../utils/setAttributes";
 import normalizeColor from "../utils/normalizeColor";
 
+let index = 1;
+
 /**
  * Create a custom signature block component from an annotation definition.
  * This is used for annotations of type `signature`.
@@ -61,9 +63,11 @@ function createSignatureBlock(a) {
     "dominant-baseline": "middle",
     fill: "#545225",
   });
-  text.textContent = "Signature area";
+  text.textContent = `Signature area ${index}`;
 
   group.appendChild(text);
+
+  index = index + 1;
 
   return group;
 }
