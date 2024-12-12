@@ -4,7 +4,7 @@ Annotation layer for [PDF.js](https://github.com/mozilla/pdf.js).
 
 Combined fork of archived [instructure/pdf-annotate.js](https://github.com/instructure/pdf-annotate.js/) and [Submitty/pdf-annotate.js](https://github.com/Submitty/pdf-annotate.js). Under active development for usage within [goran-cds](https://github.com/goran-cds/goran-cds).
 
-To report issues for pdf-annotate.js, please file them under the [goran-cds/goran-cds](https://github.com/goran-cds/goran-cds) repository.
+To report issues for pdf-annotate.js, please file them under the [goran-cds/pdf-annotate.js](https://github.com/goran-cds/pdf-annotate.js) repository.
 
 ## Objectives
 
