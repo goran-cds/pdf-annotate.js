@@ -2,35 +2,19 @@ import setAttributes from "../utils/setAttributes";
 import normalizeColor from "../utils/normalizeColor";
 
 /**
- * Create an SVGCircleElement from an annotation definition.
- * This is used for annotations of type `circle`.
+ * Create a custom signature block component from an annotation definition.
+ * This is used for annotations of type `signature`.
  *
  * @param {Object} a The annotation definition
- * @return {SVGGElement|SVGCircleElement} A circle to be rendered
+ * @return {SVGGElement} A svg to be rendered
  */
-export default function renderCircle(a) {
-  let circle = createCircle(a);
-  let color = normalizeColor(a.color || "#f00");
+export default function renderSignatureBlock(a) {
+  let signatureBlock = createSignatureBlock(a);
 
-  if (a.type === "circle") {
-    setAttributes(circle, {
-      stroke: color,
-      fill: "none",
-      "stroke-width": 5,
-    });
-  }
-  if (a.type === "emptycircle") {
-    setAttributes(circle, {
-      stroke: color,
-      fill: "none",
-      "stroke-width": 2,
-    });
-  }
-
-  return circle;
+  return signatureBlock;
 }
 
-function createCircle(a) {
+function createSignatureBlock(a) {
   let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
   let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");

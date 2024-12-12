@@ -4,7 +4,7 @@ import renderPoint from "./renderPoint";
 import renderRect from "./renderRect";
 import renderStamp from "./renderStamp";
 import renderText from "./renderText";
-import renderCircle from "./renderCircle";
+import renderSignatureBlock from "./renderSignatureBlock";
 import renderArrow from "./renderArrow";
 
 const isFirefox = /firefox/i.test(navigator.userAgent);
@@ -138,7 +138,7 @@ export function appendChild(svg, annotation, viewport) {
     case "circle":
     case "fillcircle":
     case "emptycircle":
-      child = renderCircle(annotation);
+      child = renderSignatureBlock(annotation);
       break;
     case "strikeout":
       child = renderLine(annotation);

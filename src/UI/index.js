@@ -5,7 +5,12 @@ import { disableArrow, enableArrow, setArrow } from "./arrow";
 import { disableEraser, enableEraser } from "./eraser";
 import { disablePoint, enablePoint } from "./point";
 import { disableRect, enableRect } from "./rect";
-import { disableCircle, enableCircle, setCircle, addCircle } from "./circle";
+import {
+  disableSignatureBlock,
+  enableSignatureBlock,
+  setSignatureBlock,
+  addSignatureBlock,
+} from "./signatureBlock";
 import { disableText, enableText, setText } from "./text";
 import { createPage, renderPage } from "./page";
 
@@ -27,10 +32,10 @@ export default {
   disableRect,
   enableRect,
 
-  disableCircle,
-  enableCircle,
-  setCircle,
-  addCircle,
+  disableSignatureBlock,
+  enableSignatureBlock,
+  setSignatureBlock,
+  addSignatureBlock,
 
   disableArrow,
   enableArrow,
