@@ -135,9 +135,7 @@ export function appendChild(svg, annotation, viewport) {
     case "highlight":
       child = renderRect(annotation);
       break;
-    case "circle":
-    case "fillcircle":
-    case "emptycircle":
+    case "signature":
       child = renderSignatureBlock(annotation);
       break;
     case "strikeout":
