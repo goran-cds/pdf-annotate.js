@@ -1,11 +1,8 @@
 # @goran-cds/pdf-annotate.js
 
-[![Test](https://github.com/goran-cds/pdf-annotate.js/actions/workflows/test.yml/badge.svg?branch=main&event=push)](https://github.com/goran-cds/pdf-annotate.js/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/goran-cds/pdf-annotate.js/branch/master/graph/badge.svg)](https://codecov.io/gh/goran-cds/pdf-annotate.js)
-
 Annotation layer for [PDF.js](https://github.com/mozilla/pdf.js).
 
-Combined fork of archived [instructure/pdf-annotate.js](https://github.com/instructure/pdf-annotate.js/) and deleted DynamicEnvironmentSystems/pdf-annotate.js. Under active development for usage within [goran-cds](https://github.com/goran-cds/goran-cds).
+Combined fork of archived [instructure/pdf-annotate.js](https://github.com/instructure/pdf-annotate.js/) and [Submitty/pdf-annotate.js](https://github.com/Submitty/pdf-annotate.js). Under active development for usage within [goran-cds](https://github.com/goran-cds/goran-cds).
 
 To report issues for pdf-annotate.js, please file them under the [goran-cds/goran-cds](https://github.com/goran-cds/goran-cds) repository.
 
