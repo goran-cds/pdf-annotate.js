@@ -101,13 +101,13 @@ function saveText() {
       },
     });
 
-    document.dispatchEvent(event);
-
     PDFJSAnnotate.getStoreAdapter()
       .addAnnotation(documentId, pageNumber, annotation)
       .then((annotation) => {
         appendChild(svg, annotation);
       });
+
+    document.dispatchEvent(event);
   }
 
   closeInput();

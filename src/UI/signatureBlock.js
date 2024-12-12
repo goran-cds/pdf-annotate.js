@@ -40,8 +40,6 @@ function handleDocumentMouseup(e) {
     },
   });
 
-  document.dispatchEvent(event);
-
   saveSignatureBlock(
     svg,
     _type,
@@ -53,6 +51,8 @@ function handleDocumentMouseup(e) {
     _height,
     _color
   );
+
+  document.dispatchEvent(event);
 }
 
 /**
