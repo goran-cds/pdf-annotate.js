@@ -1,5 +1,5 @@
-import setAttributes from '../utils/setAttributes';
-import normalizeColor from '../utils/normalizeColor';
+import setAttributes from "../utils/setAttributes";
+import normalizeColor from "../utils/normalizeColor";
 
 /**
  * Create an SVGCircleElement from an annotation definition.
@@ -10,28 +10,20 @@ import normalizeColor from '../utils/normalizeColor';
  */
 export default function renderCircle(a) {
   let circle = createCircle(a);
-  let color = normalizeColor(a.color || '#f00');
+  let color = normalizeColor(a.color || "#f00");
 
-  if (a.type === 'circle') {
+  if (a.type === "circle") {
     setAttributes(circle, {
       stroke: color,
-      fill: 'none',
-      'stroke-width': 5
+      fill: "none",
+      "stroke-width": 5,
     });
   }
-  if (a.type === 'emptycircle') {
+  if (a.type === "emptycircle") {
     setAttributes(circle, {
       stroke: color,
-      fill: 'none',
-      'stroke-width': 2
-    });
-  }
-
-  if (a.type === 'fillcircle') {
-    setAttributes(circle, {
-      stroke: color,
-      fill: color,
-      'stroke-width': 5
+      fill: "none",
+      "stroke-width": 2,
     });
   }
 
@@ -39,12 +31,33 @@ export default function renderCircle(a) {
 }
 
 function createCircle(a) {
-  let circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-  setAttributes(circle, {
-    cx: a.cx,
-    cy: a.cy,
-    r: a.r
+  let group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+
+  let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  setAttributes(rect, {
+    x: a.cx - 30,
+    y: a.cy - 15,
+    width: 60,
+    height: 30,
+    fill: "#fef18b",
   });
 
-  return circle;
+  // Append the shape to the group
+  group.appendChild(rect);
+
+  // Add a hardcoded text element
+  let text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  setAttributes(text, {
+    x: a.cx,
+    y: a.cy,
+    "font-size": 8,
+    "text-anchor": "middle",
+    "dominant-baseline": "middle",
+    fill: "#854d0f",
+  });
+  text.textContent = "Signature area";
+
+  group.appendChild(text);
+
+  return group;
 }
