@@ -8,7 +8,6 @@ import { disableRect, enableRect } from "./rect";
 import { disableCircle, enableCircle, setCircle, addCircle } from "./circle";
 import { disableText, enableText, setText } from "./text";
 import { createPage, renderPage } from "./page";
-import { disableStamp, enableStamp } from "./stamp";
 
 export default {
   addEventListener,
@@ -32,9 +31,6 @@ export default {
   enableCircle,
   setCircle,
   addCircle,
-
-  disableStamp,
-  enableStamp,
 
   disableArrow,
   enableArrow,
