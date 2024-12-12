@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cp ./node_modules/pdfjs-dist/build/pdf.js ./shared/
-cp ./node_modules/pdfjs-dist/build/pdf.js.map ./shared
-cp ./node_modules/pdfjs-dist/build/pdf.worker.js ./shared/
-cp ./node_modules/pdfjs-dist/build/pdf.worker.js.map ./shared/
-cp ./node_modules/pdfjs-dist/web/pdf_viewer.js ./shared/
-cp ./node_modules/pdfjs-dist/web/pdf_viewer.js.map ./shared/
+cp ./node_modules/pdfjs-dist/build/pdf.mjs ./shared/
+cp ./node_modules/pdfjs-dist/build/pdf.mjs.map ./shared
+cp ./node_modules/pdfjs-dist/build/pdf.worker.mjs ./shared/
+cp ./node_modules/pdfjs-dist/build/pdf.worker.mjs.map ./shared/
+cp ./node_modules/pdfjs-dist/web/pdf_viewer.mjs ./shared/
+cp ./node_modules/pdfjs-dist/web/pdf_viewer.mjs.map ./shared/
 cp ./node_modules/pdfjs-dist/web/pdf_viewer.css ./shared/
 cp -R ./node_modules/pdfjs-dist/cmaps ./shared
