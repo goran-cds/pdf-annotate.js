@@ -94,6 +94,7 @@ function saveText() {
 
     const event = new CustomEvent("addAnnotation", {
       detail: {
+        page: pageNumber,
         type: "textbox",
         size: _textSize * scale,
         color: _textColor,

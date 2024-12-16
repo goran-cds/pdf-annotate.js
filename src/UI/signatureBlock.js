@@ -66,10 +66,13 @@ function saveSignatureBlock(svg, type, pt, width, height, color) {
     h: height,
   };
 
+  let { documentId, pageNumber } = getMetadata(svg);
+
   const event = new CustomEvent("addAnnotation", {
     detail: {
-      type,
-      color,
+      page: pageNumber,
+      type: type,
+      color: color,
       cx: svg_pt[0],
       cy: svg_pt[1],
       w: width,
@@ -78,8 +81,6 @@ function saveSignatureBlock(svg, type, pt, width, height, color) {
   });
 
   document.dispatchEvent(event);
-
-  let { documentId, pageNumber } = getMetadata(svg);
 
   // Add the annotation
   PDFJSAnnotate.getStoreAdapter()
