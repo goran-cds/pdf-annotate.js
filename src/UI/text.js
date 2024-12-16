@@ -92,14 +92,17 @@ function saveText() {
       rotation: -viewport.rotation,
     };
 
-    // const event = new CustomEvent("annotation:placed", {
-    //   detail: {
-    //     toolType: "textbox",
-    //     content: value,
-    //     position: { x: pt[0], y: pt[1] },
-    //     size: _textSize * scale,
-    //   },
-    // });
+    const event = new CustomEvent("addAnnotation", {
+      detail: {
+        type: "textbox",
+        size: _textSize * scale,
+        color: _textColor,
+        content: value,
+        x: pt[0],
+        y: pt[1],
+        rotation: -viewport.rotation,
+      },
+    });
 
     PDFJSAnnotate.getStoreAdapter()
       .addAnnotation(documentId, pageNumber, annotation)
@@ -107,7 +110,7 @@ function saveText() {
         appendChild(svg, annotation);
       });
 
-    // document.dispatchEvent(event);
+    document.dispatchEvent(event);
   }
 
   closeInput();

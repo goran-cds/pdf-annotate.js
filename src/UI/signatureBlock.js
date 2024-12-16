@@ -31,15 +31,6 @@ function handleDocumentMouseup(e) {
   }
   let rect = svg.getBoundingClientRect();
 
-  // const event = new CustomEvent("annotation:placed", {
-  //   detail: {
-  //     toolType: _type,
-  //     content: svg,
-  //     position: { x: e.clientX - rect.left, y: e.clientY - rect.top },
-  //     size: { w: _width, h: _height },
-  //   },
-  // });
-
   saveSignatureBlock(
     svg,
     _type,
@@ -51,8 +42,6 @@ function handleDocumentMouseup(e) {
     _height,
     _color
   );
-
-  // document.dispatchEvent(event);
 }
 
 /**
@@ -76,6 +65,19 @@ function saveSignatureBlock(svg, type, pt, width, height, color) {
     w: width,
     h: height,
   };
+
+  const event = new CustomEvent("addAnnotation", {
+    detail: {
+      type,
+      color,
+      cx: svg_pt[0],
+      cy: svg_pt[1],
+      w: width,
+      h: height,
+    },
+  });
+
+  document.dispatchEvent(event);
 
   let { documentId, pageNumber } = getMetadata(svg);
 
