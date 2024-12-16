@@ -31,14 +31,14 @@ function handleDocumentMouseup(e) {
   }
   let rect = svg.getBoundingClientRect();
 
-  const event = new CustomEvent("annotation:placed", {
-    detail: {
-      toolType: _type,
-      content: svg,
-      position: { x: e.clientX - rect.left, y: e.clientY - rect.top },
-      size: { w: _width, h: _height },
-    },
-  });
+  // const event = new CustomEvent("annotation:placed", {
+  //   detail: {
+  //     toolType: _type,
+  //     content: svg,
+  //     position: { x: e.clientX - rect.left, y: e.clientY - rect.top },
+  //     size: { w: _width, h: _height },
+  //   },
+  // });
 
   saveSignatureBlock(
     svg,
@@ -52,7 +52,7 @@ function handleDocumentMouseup(e) {
     _color
   );
 
-  document.dispatchEvent(event);
+  // document.dispatchEvent(event);
 }
 
 /**
