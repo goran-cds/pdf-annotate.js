@@ -68,19 +68,19 @@ function saveSignatureBlock(svg, type, pt, width, height, color) {
 
   let { documentId, pageNumber } = getMetadata(svg);
 
-  const event = new CustomEvent("addAnnotation", {
-    detail: {
-      page: pageNumber,
-      type: type,
-      color: color,
-      cx: svg_pt[0],
-      cy: svg_pt[1],
-      w: width,
-      h: height,
-    },
-  });
+  // const event = new CustomEvent("addAnnotation", {
+  //   detail: {
+  //     page: pageNumber,
+  //     type: type,
+  //     color: color,
+  //     cx: svg_pt[0],
+  //     cy: svg_pt[1],
+  //     w: width,
+  //     h: height,
+  //   },
+  // });
 
-  document.dispatchEvent(event);
+  // document.dispatchEvent(event);
 
   // Add the annotation
   PDFJSAnnotate.getStoreAdapter()
